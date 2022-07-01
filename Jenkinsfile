@@ -5,7 +5,7 @@ pipeline {
         stage("Run Tests") {
             steps {
                 echo "Testing with UnitTest"
-                sh "./manage.py test"
+                sh "python manage.py test"
                 echo "Testing with Pytest"
                 sh "pytest"
             }
