@@ -7,7 +7,7 @@ pipeline {
                 echo "Testing with UnitTest"
                 sh "python manage.py test"
                 echo "Testing with Pytest"
-                sh "pytest"
+                sh "pytest -vv"
             }
         }
         // Another stage
