@@ -12,16 +12,18 @@ def test_should_create_user_with_username(db) -> None:
     assert user.username == "Jemima"
 
 
-def test_should_check_password(db) -> None:
-    user = User.objects.create_user("A")
-    user.set_password("secret")
+@pytest.fixture
+def user_a(db) -> User:
+    """Create a test fixture."""
+    return User.objects.create_user("A")
 
-    assert user.check_password("secret") is True
+
+def test_should_check_password(db, user_a: User) -> None:
+    user_a.set_password("secret")
+    assert user_a.check_password("secret") is True
 
 
-def test_should_not_check_unusable_password(db) -> None:
-    user = User.objects.create_user("A")
-    user.set_password("secret")
-    user.set_unusable_password()
-
-    assert user.check_password("secret") is False
+def test_should_not_check_unusable_password(db, user_a: User) -> None:
+    user_a.set_password("A")
+    user_a.set_unusable_password()
+    assert user_a.check_password("secret") is False
