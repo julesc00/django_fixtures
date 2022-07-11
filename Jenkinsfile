@@ -11,5 +11,11 @@ pipeline {
             }
         }
         // Another stage
+        stage("Run Bash Script") {
+            steps {
+                echo "[INFO] Running script."
+                sh "./script.sh"
+            }
+        }
     }
 }
